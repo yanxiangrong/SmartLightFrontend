@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="香橙派" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="虚拟机">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/user/SmartLightFrontend" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="香橙派">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/yan/SmartLightFrontend" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/node_modules" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
