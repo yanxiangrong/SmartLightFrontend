@@ -101,7 +101,11 @@ export default {
         addr: this.device.addr,
         switch: this.value1
       };
-      axios.post(api.setDevices, status)
+      axios.post(api.setDevices, status, {
+        headers: {
+          token: localStorage.getItem("token")
+        }
+      })
           .then(res => {
                 console.log(res)
               }

@@ -8,7 +8,7 @@
       </el-col>
     </el-row>
     <el-dialog v-model="dialogTableVisible" :title="dialogTitle">
-      <DeviceMenu :device="menuDevice" />
+      <DeviceMenu :device="menuDevice"/>
     </el-dialog>
   </div>
 </template>
@@ -20,6 +20,7 @@ import api from "../api/api";
 import DeviceMenu from "./DeviceMenu.vue";
 import addrToHex from "../util/util";
 import {Device} from "../api/api";
+import {ElMessage} from "element-plus";
 
 export default {
   name: "DevicesList",
@@ -45,6 +46,9 @@ export default {
     update() {
       axios.get(api.allDevices, {
         method: "GET",
+        headers: {
+          token: localStorage.getItem("token")
+        }
       })
           .then(response => {
             // console.log(response.data)
@@ -52,6 +56,15 @@ export default {
           })
           .catch(err => {
             console.log(err)
+            if (err.response.status == 403) {
+              ElMessage({
+                message: '请求被拒绝，请重新登录！',
+                type: 'error',
+              })
+              setTimeout(() => {
+                this.$router.push({path: '/login'})
+              }, 3000)
+            }
           })
     },
     openMenuDialog(device) {

@@ -1,9 +1,10 @@
 <template>
-  <h2 class="title">物联网系统控制面板</h2>
+  <h2 class="title">智能灯控系统</h2>
   <div class="devicePanel">
     <div class="buttonPanel">
       <el-button class="button2" @click="openAll" round>打开所有灯</el-button>
       <el-button class="button" @click="closeAll" round>关闭所有灯</el-button>
+      <el-button class="button" style="margin-left: auto; margin-right: 20px" @click="logout" round>注销</el-button>
     </div>
     <h4 class="listTitle">我的设备</h4>
     <DevicesList/>
@@ -14,6 +15,7 @@
 import DevicesList from "../components/DevicesList.vue";
 import axios from "axios";
 import api from "../api/api";
+import {ElMessage} from "element-plus";
 
 export default {
   name: "home",
@@ -22,6 +24,9 @@ export default {
     openAll() {
       axios.get(api.openAll, {
         method: "GET",
+        headers: {
+          token: localStorage.getItem("token")
+        }
       })
           .then(response => {
             console.log(response.data)
@@ -34,6 +39,9 @@ export default {
     closeAll() {
       axios.get(api.closeAll, {
         method: "GET",
+        headers: {
+          token: localStorage.getItem("token")
+        }
       })
           .then(response => {
             console.log(response.data)
@@ -41,6 +49,14 @@ export default {
           .catch(err => {
             console.log(err)
           })
+    },
+
+    logout() {
+      ElMessage({
+        message: '已注销！',
+        type: 'info',
+      })
+      localStorage.removeItem("token")
     }
   }
 }

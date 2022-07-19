@@ -52,7 +52,23 @@ export default {
 
       axios.post(api.login, user)
           .then(res => {
-                console.log(res)
+                if (res.data["status"] == "ok") {
+                  ElMessage({
+                    message: '登陆成功！3秒后自动跳转。',
+                    type: 'success',
+                  })
+
+                  localStorage.setItem("token", res.data["token"])
+
+                  setTimeout(() => {
+                    this.$router.push({path: '/'})
+                  }, 3000)
+                } else {
+                  ElMessage({
+                    message: '登陆失败！',
+                    type: 'error',
+                  })
+                }
               }
           ).catch(err => {
         console.log(err)

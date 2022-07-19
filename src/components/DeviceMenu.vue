@@ -55,7 +55,14 @@ export default {
     onSubmit() {
 
       this.saveLoading = true
-      axios.post(api.setRemark, {addr: this.device.addr, remark: this.form.remark})
+      axios.post(api.setRemark, {
+        addr: this.device.addr,
+        remark: this.form.remark
+      }, {
+        headers: {
+          token: localStorage.getItem("token")
+        }
+      })
           .then(res => {
                 console.log(res)
                 ElMessage({
@@ -75,7 +82,14 @@ export default {
     },
     onDelete() {
       this.deleteLoading = true
-      axios.get(api.deleteDevice, {params: {addr: this.device.addr}})
+      axios.get(api.deleteDevice, {
+        params: {
+          addr: this.device.addr
+        },
+        headers: {
+          token: localStorage.getItem("token")
+        }
+      })
           .then(res => {
                 console.log(res)
                 ElMessage({
